@@ -1,5 +1,11 @@
 export const getData = async () => {
-    const api = await fetch("http://localhost:8000/users");
-    const data = await api.json();
-    return data;
-}
+  const res = await fetch("http://localhost:8000/users");
+  const data = await res.json();
+  return data;
+};
+
+export const getUserById = async (userId) => {
+  const res = await fetch(`http://localhost:8000/users/${userId}`);
+  const data = await res.json();
+  return data;
+};

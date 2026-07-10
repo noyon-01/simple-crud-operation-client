@@ -1,5 +1,7 @@
+import { AddUser } from "@/components/AddUser";
 import UserTable from "@/components/UsersTable";
-import { getData } from "@/lib/getData"
+import { addNewUser, deleteUserById } from "@/lib/actions";
+import { getData } from "@/lib/getData";
 
 export default async function UsersCollection() {
   const users = await getData();
@@ -7,8 +9,13 @@ export default async function UsersCollection() {
 
   return (
     <div>
-      <h1>This is Users Page.</h1>
-      <UserTable users={users}/>
+      <div className="flex justify-between p-5">
+        <h1>This is Users Page.</h1>
+        <AddUser addNewUserAction={addNewUser} />
+      </div>
+      <div className="px-5">
+        <UserTable users={users} deleteUserAction={deleteUserById} />
+      </div>
     </div>
-  )
+  );
 }

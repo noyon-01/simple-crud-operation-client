@@ -1,8 +1,14 @@
+"use client";
+
 import { Button, Table } from "@heroui/react";
 import Link from "next/link";
 
-export default function UserTable({ users }) {
+export default function UserTable({ users, deleteUserAction }) {
   console.log(users);
+
+  const handleDeleteUser = async (userId) => {
+    await deleteUserAction(userId);
+  };
 
   return (
     <Table>
@@ -29,7 +35,11 @@ export default function UserTable({ users }) {
                   <Link href={`users/${user._id}`}>
                     <Button variant="primary">Edit</Button>
                   </Link>
-                  <Button className="ml-4" variant="danger">
+                  <Button
+                    onClick={() => handleDeleteUser(user._id)}
+                    className="ml-4"
+                    variant="danger"
+                  >
                     Delete
                   </Button>
                 </Table.Cell>
